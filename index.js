@@ -5,8 +5,8 @@ const path = require('path');
 
 const BoxSDK = require('box-node-sdk');
 
-const DOMAIN = process.env.DOMAIN || 'http://localhost';
 const PORT = process.env.PORT || 8000;
+const DOMAIN = process.env.DOMAIN || `http://localhost:${PORT}`;
 
 const sdk = new BoxSDK({
 	clientID: process.env.CLIENT_ID,
@@ -15,7 +15,7 @@ const sdk = new BoxSDK({
 
 const authURL = sdk.getAuthorizeURL({
 	response_type: 'code',
-	redirect_uri: `${DOMAIN}:${PORT}/authorize_callback`,
+	redirect_uri: `${DOMAIN}/authorize_callback`,
 });
 
 const app = express();

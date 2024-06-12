@@ -76,7 +76,7 @@ app.get('/authorize_callback', async (req, res) => {
 	req.session.user = user;
 	req.session.user_token = tokenInfo; // Split storing access token and refresh token for production
 
-	res.redirect('/evercast');
+	res.redirect('https://app.evercast.us/?noBrowserCheck=true');
 });
 
 app.get('/logout', (req, res) => {

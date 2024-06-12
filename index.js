@@ -56,9 +56,14 @@ app.get('/', auth_middleware, async (req, res) => {
 	});
 });
 
+app.get('/evercast', auth_middleware, async (req, res) => {
+	const user = req.session.user;
+
+	res.render('evercast');
+});
+
 app.get('/authorize_callback', async (req, res) => {
 	const { code } = req.query;
-	console.log({ code });
 
 	if (!code) return res.status(401).send('Access denied');
 
@@ -71,7 +76,7 @@ app.get('/authorize_callback', async (req, res) => {
 	req.session.user = user;
 	req.session.user_token = tokenInfo; // Split storing access token and refresh token for production
 
-	res.redirect('/');
+	res.redirect('/evercast');
 });
 
 app.get('/logout', (req, res) => {
